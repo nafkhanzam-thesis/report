@@ -1,0 +1,49 @@
+\subsection{\Glsfirst{AMRBART} \citek{bai2022}}
+
+\Gls{PLM} telah terbukti dapat melakukan \ti{task} \amrparsing{} dan generasi AMR-to-text dengan baik.
+Namun, \gls{PLM} umumnya dilatih pada data tekstual, sehingga tidak optimal untuk melakukan generasi data terstruktur seperti \AMR{}.
+\textcite{bai2022} memperbaiki permasalahan tersebut dengan menambahkan strategi \pretraining{} pada model untuk mengintegrasikan informasi teks dan graf \AMR{}.
+Model ini melinearisasi graf \AMR{} ke sekuens sehingga baik AMR parsing dan AMR-to-text generation dapat dilakukan menggunakan model \gls{seq2seq}.
+Model ini melakukan pre-training pada struktur \AMR{} menggunakan \gls{BART}.
+
+Tahapan \ti{preprocessing} dalam model ini mengadopsi penelitian \textcite{bevilacqua2021}, yaitu \ti{recategorization} untuk mengurangi ukuran \ti{vocab} untuk menangani \ti{sparsity} data.
+\ti{Recategorization} dilakukan dengan menghapus simpul \ti{sense}, \ti{link} wiki, atribut polaritas, dan menganonimasi \ti{named entity}.
+Walaupun \ti{recategorization} menunjukkan kinerja yang kurang pada penelitian \textcite{bevilacqua2021}, namun pada \gls{AMRBART} tidak terjadi pengurangan kinerja.
+Lemmatisasi juga dilakukan pada fase \ti{preprocessing}.
+Linearisasi graf menggunakan algoritma \gls{DFS} yang diadopsi dari penelitian \textcite{bevilacqua2021}.
+Pembentukan graf \AMR{} hasil prediksi dilakukan pada tahapan \ti{postprocessing} dengan mengubah bentuk format \gls{DFS} menjadi bentuk format PENMAN.
+Wikifikasi, pemberian \ti{link} pada atribut wiki, juga dilakukan menggunakan BLINK Entity Linker \citek{wu2020}.
+Pengembalian atribut polaritas dilakukan dengan mengidentifikasi lemma yang bersifat negasi.
+
+Model ini mengenalkan dua strategi \ti{self-supervised training} dalam melakukan \pretraining{} model \gls{BART} pada graf \AMR{}.
+Dapat dilihat pada \cref{fig:4-3-pre-training-strategies}, strategi level \denoising{} simpul/sisi mendukung model untuk menangkap pengetahuan lokal mengenai simpul dan sisi.
+Strategi \denoising{} level graf mengarahkan model untuk memprediksi sub-graf yang dapat memfasilitasi pembelajaran graf.
+\begin{enumerate}
+  \item \Denoising{} level simpul/sisi.
+  Pengaplikasian fungsi noise pada simpul dan sisi AMR untuk mengkonstruksi input graf yang kotor.
+  Fungsi noise ini diimplementasikan dengan \ti{masking} 15\% simpul dan 15\% sisi di setiap graf.
+
+  \item \Denoising{} level sub-graf.
+  \ti{Task} ini bertujuan untuk mengembalikan graf lengkap ketika diberikan sebagian dari graf.
+  Metode ini menghilangkan sub-graf secara acak dari graf dan mengubahnya dengan token \ti{mask}.
+\end{enumerate}
+
+\fig[1]{4-3-pre-training-strategies}
+  {sections/chapter-2/4-3-pre-training-strategies.png}
+  {Ilustrasi strategi pre-training: (1) \denoising{} level simpul/sisi (a->b); (2) \denoising{} level sub-graf (c->b) \citek{bai2022}.}
+
+Strategi \pretraining{} (P.T.) dan \finetuning{} (F.T.) dapat dilihat pada \cref{tab:4-3-pt-ft-strategies}.
+Token \code{<s>} dan \code{<g>} digunakan untuk membedakan informasi teks dan graf pada input.
+\Pretraining{} dilakukan dengan menghapus sebagian dari input teks/graf dengan teknik \denoising{}.
+\Finetuning{} dilakukan dengan menghapus keseluruhan dari teks/graf yang dituju.
+Pada standard \pretraining{} dan \finetuning{}, input berupa salah satu dari teks atau graf dan outputnya berupa teks atau graf yang dituju.
+Namun, pada unified \pretraining{} dan \finetuning{}, input berupa kedua teks dan graf, dan outputnya berupa teks atau graf yang dituju.
+
+\tabl{4-3-pt-ft-strategies}
+  {sections/chapter-2/4-3-pt-ft-strategies.csv}
+  {
+    Strategi \pretraining{} (P.T.) dan \finetuning{} (F.T.) untuk pelatihan graf \citek{bai2022}.
+    \code{$t/g$} merupakan teks/graf \ti{original}.
+    \code{$\hat{t}/\hat{g}$} merupakan teks/graf yang \ti{noisy} (hasil \denoising{}).
+    \code{$\bar{t}/\bar{g}$} merupakan teks/graf yang hilang.
+  }

@@ -1,0 +1,13 @@
+\section{Analisis Masalah}
+
+Pelatihan pembelajaran mesin untuk \ti{task} \amrparsing{} memerlukan dataset \ti{training} pasangan kalimat dan graf \AMR{}-nya.
+Penelitian \textcite{putra2022} menggunakan dataset silver yang dihasilkan dari AMR 2.0 dan korpus paralel PANL-BPPT sebagai data latih \amrparsing{} lintas bahasa untuk Bahasa Indonesia.
+Berdasarkan pada penelitian \textcite{lee2022}, model \amrparsing{} dapat meningkat kinerjanya dengan bertambahnya jumlah dataset silver.
+Dataset yang digunakan \textcite{putra2022} secara kuantitas masih kurang karena ada korpus paralel IWSLT17 dan dataset AMR 3.0 yang belum digunakan.
+
+Pembangunan dataset silver pada penelitian \textcite{putra2022} tidak dievaluasi kualitasnya.
+Banyak potensi \ti{instance} data berkualitas buruk yang digunakan sebagai data latih, sehingga dapat mengurangi kinerja model.
+Perhitungan kualitas tersebut juga dapat dimanfaatkan sebagai acuan dalam memperbaiki kualitas dataset silver untuk meningkatkan kinerja model \amrparsing{}.
+
+Model \gls{AMRBART} \citek{bai2022} merupakan model \sota{} yang dibangun untuk \amrparsing{} dan AMR-to-text untuk Bahasa Inggris.
+Belum dikembangkan sebuah model \amrparsing{} untuk lintas bahasa berdasarkan model graf pralatih \gls{AMRBART}.

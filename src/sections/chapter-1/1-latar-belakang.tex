@@ -1,0 +1,68 @@
+\section{Latar Belakang}
+
+% NLP
+Teks yang dapat dipahami oleh manusia tidak dapat dipahami secara langsung oleh model \gls{NLP} sehingga diperlukan sebuah bentuk representasi lain.
+Ada beberapa teknik dalam membuat representasi dari sebuah teks, seperti \ti{bag of words}, \ti{n-gram}, \ti{word embedding}, \gls{SRL}, dan \AMR{}.
+Dari representasi-representasi tersebut, dapat dilakukan berbagai macam \ti{task} seperti peringkasan teks, klasifikasi sentimen, mesin translasi, \ti{question-answering}, deteksi parafrasa, dan lain-lain.
+
+% AMR
+\AMR{} merupakan salah satu representasi yang memperhatikan semantik pada tingkat kalimat dalam bentuk struktur data graf berarah yang mempunyai akar \citek{banarescu2013}.
+\AMR{} awalnya didesain untuk merepresentasikan kalimat berbahasa Inggris sehingga bentuk graf \AMR{} juga dituliskan dengan Bahasa Inggris.
+Sebuah teks yang mengandung banyak kalimat dapat direpresentasikan menjadi beberapa graf \AMR{}, dengan setiap graf merepresentasikan setiap kalimat.
+Dalam membuat sebuah \AMR{} dari sebuah kalimat, perlu dilakukan sebuah proses yang dinamakan \amrparsing{}.
+
+% AMR Parsing Techniques
+\amrparsing{} dapat dikategorikan menjadi dua pendekatan, yaitu dua tahap \ti{parsing} dan satu tahap \ti{parsing} \citek{cai2020}.
+Pada pendekatan dua tahap \ti{parsing} digunakan desain \ti{pipeline} untuk identifikasi konsep dan prediksi relasi.
+Pada pendekatan satu tahap \ti{parsing} dikategorikan menjadi tiga jenis, yaitu \ti{parsing} berbasis transisi, \ti{parsing} berbasis \gls{seq2seq}, dan \ti{parsing} berbasis graf.
+Pendekatan satu tahap jenis \ti{parsing} berbasis transisi dilakukan dengan memproses kalimat dari kiri ke kanan dan membangun grafik secara bertahap dengan secara bergantian memasukkan simpul atau sisi baru.
+Pendekatan satu tahap jenis \ti{parsing} berbasis \gls{seq2seq} dengan melihat \ti{parsing} sebagai transduksi urutan linear ke urutan linear juga dengan memanfaatkan linearisasi grafik AMR.
+Pendekatan satu tahap jenis \ti{parsing} berbasis graf di mana setiap langkah waktu, simpul baru beserta koneksinya ke simpul yang ada diputuskan bersama secara berurutan maupun paralel.
+
+% Metrics and Dataset
+Dalam mengukur kelayakan hasil graf \AMR{} yang dihasilkan dari suatu teknik, digunakan metrik \SMATCH{} \citek{cai2013}.
+SMATCH mengukur derajat \ti{overlap} antara dua struktur fitur semantik graf \AMR{}.
+Teknik-teknik \amrparsing{} tersebut diukur kelayakannya menggunakan dataset pasangan teks berbahasa Inggris dengan graf AMR-nya.
+
+% ID-ID Conventional AMR Parsing
+Pada \AMR{} berbahasa Indonesia, telah dikembangkan untuk \ti{parsing} berbasis aturan \citek{severina2019}, berbasis \ti{dependency parser} \citek{ilmy2020}, dan berbasis \crosslingual{} \citek{putra2022}.
+Teknik \amrparsing{} berbasis aturan dan \ti{dependency parser} masih terbatas karena kurangnya panduan anotasi dan PropBank untuk adaptasi \AMR{} dalam Bahasa Indonesia.
+Dataset yang digunakan sebagai data pelatihan teknik tersebut terdiri dari 1,130 pasang kalimat dan AMR berbahasa Indonesia.
+Anotasi pada dataset tersebut hanya terbatas pada 6 relasi saja, yaitu \code{:ARG0}, \code{:ARG1}, \code{:name}, \code{:time}, \code{:location}, \code{:mod} \citek{ilmy2020}.
+Konsep yang membutuhkan argumen relasi lebih banyak yang tidak tersedia akan diabaikan sehingga AMR Bahasa Indonesia tidak dapat merepresentasikan kalimat yang lebih panjang dan kompleks.
+
+% XL-AMR
+\amrparsing{} awalnya digunakan untuk mengubah dari kalimat berbahasa Inggris menjadi sebuah graf \AMR{} berbahasa Inggris.
+\AMR{} dalam bahasa selain Bahasa Inggris memiliki banyak limitasi karena \AMR{} berbahasa Inggris sudah dikembangkan lebih dahulu dan memiliki anotasi konsep dan relasi lengkap yang tidak dimiliki \AMR{} bahasa lain.
+Ada beberapa teknik yang dapat membaca kalimat bahasa lain menjadi graf \AMR{} berbahasa Inggris untuk merepresentasikan kalimat dari bahasa selain Bahasa Inggris.
+\textcite{damonte2018} mengusulkan teknik \amrparsing{} lintas bahasa, yaitu teknik mengubah kalimat dari bahasa selain Bahasa Inggris menjadi \AMR{} berbahasa Inggris.
+Dalam teknik tersebut, dibutuhkan dataset pasangan teks berbahasa selain Bahasa Inggris yang dituju dengan graf \AMR{}-nya.
+Model \gls{XL-AMR} memiliki kinerja SMATCH 53.0 untuk Bahasa Cina, 53.0 untuk Bahasa Jernam, 58.1 untuk Bahasa Italia, dan 58.0 untuk Bahasa Spanyol.
+
+% XL-AMR Indonesia
+Pada Bahasa Indonesia, beberapa teknik \amrparsing{} untuk teks berbahasa Indonesia juga dikembangkan.
+Beberapa \amrparsing{} Bahasa Indonesia yang telah dikembangkan adalah \amrparsing{} berbasis aturan \citek{severina2019}, berbasis \ti{dependency parser} \citek{ilmy2020}, dan berbasis lintas bahasa \citek{putra2022}.
+Teknik \amrparsing{} oleh \textcite{putra2022} menggunakan teknik \ti{training} \gls{XL-AMR} \citek{blloshmi2020} dengan model \gls{stog} \citek{zhang2019} untuk melakukan \amrparsing{} dari kalimat berbahasa Indonesia menjadi graf \AMR{} berbahasa Inggris.
+Model \gls{stog} menggunakan pendekatan dua tahap \ti{parsing}, yaitu tahap identifikasi konsep dan tahap prediksi relasi.
+Model \amrparsing{} lintas bahasa memanfaatkan \mwordem{} dalam memahami konteks setiap bahasa yang dibutuhkan.
+Model \gls{stog} menggunakan mBERT \citek{conneau2019} sebagai \mwordem{}.
+Terdapat beberapa model lain yang mendukung \mwordem{}, seperti mBART \citek{liu2020} yang merupakan versi \multil{} dari \gls{BART} \citek{lewis2020}, dan mT5 \citek{xue2021} yang merupakan versi \multil{} dari T5 \citek{raffel2020}.
+Teknik \amrparsing{} lintas bahasa dapat memanfaatkan dataset silver yang dapat dibuat dari dataset AMR dan korpus paralel.
+Korpus paralel pasangan Bahasa Inggris dan Bahasa Indonesia seperti PANL-BPPT \citek{bppt2009} dan IWSLT2017 \citek{cettolo2017} dapat digunakan untuk \amrparsing{} untuk kalimat berbahasa Indonesia.
+
+\textcite{putra2022} menggunakan dataset AMR 2.0 dan korpus paralel PANL-BPPT sebagai data latihnya.
+Kalimat Bahasa Inggris dari dataset AMR 2.0 ditranslasi menjadi Bahasa Indonesia dan kalimat Bahasa Inggris dari korpus paralel PANL-BPPT dilakukan \ti{parsing} ke graf \AMR{}.
+\textcite{putra2022} mengevaluasi kualitas dataset dengan menilai kedekatan kalimat hasil translasi dari AMR 2.0 menggunakan \cossim{}.
+Namun, kualitas dataset hasil \amrparsing{} dari korpus paralel tidak dievaluasi.
+Model terbaik dari penelitian \textcite{putra2022} menghasilkan kinerja SMATCH 51.0.
+Kinerja tersebut masih kalah dengan \ti{baseline}-nya yang menggunakan teknik \ti{translate-and-parse} dengan kinerja SMATCH 62.5.
+Hal ini diduga karena jumlah dan kualitas dataset yang dihasilkan masih belum maksimal, dan model yang dihasilkan belum menggunakan teknik pelatihan model yang lebih baik.
+
+\textcite{lee2022} memperkenalkan teknik augmentasi data dalam menghasilkan data latih untuk model \amrparsing{} lintas bahasa.
+Teknik ini menghasilkan lebih banyak pasangan graf \AMR{} dan kalimat dengan bahasa yang dituju, sehingga karena variasi data tersebut, model yang dilatih dapat menghasilkan kinerja yang lebih baik.
+Teknik tersebut meningkatkan kinerja SMATCH pada model XL-AMR \citek{blloshmi2020} menjadi 63.0 untuk Bahasa Cina, 73.7 untuk Bahasa Jernam, 76.1 untuk Bahasa Italia, dan 77.1 untuk Bahasa Spanyol.
+
+% AMRBART
+Model \amrparsing{} terbaik saat ini adalah \gls{AMRBART}.
+\gls{AMRBART} dibangun dari \ti{language model} \gls{BART} menggunakan teknik graf \pretraining{}.
+\gls{AMRBART} merupakan model \sota{} dengan kinerja SMATCH 85.4 pada dataset \AMR{} 2.0 dan 84.2 pada dataset \AMR{} 3.0 \citek{bai2022}.
