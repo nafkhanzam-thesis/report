@@ -17,6 +17,7 @@ Logika proposisi dari representasi \AMR{} pertama dapat dilihat pada \cref{fig:f
 Sedangkan bentuk logika proposisi untuk representasi kedua dapat dilihat pada \cref{fig:second-logical-proposition}.
 Berdasarkan contoh tersebut, terdapat 6 cara untuk memasangkan variabel-variabel antara kedua \AMR{} tersebut.
 \cref{tab:smatch-matching} menunjukkan kombinasi cara memasangkan variabel kedua \AMR{} tersebut.
+Hasil skor SMATCH diambil dari nilai F-Score tertinggi, yaitu 0.73.
 
 \fig{first-logical-proposition}
   {sections/chapter-2/1-1-first-logical-proposition.png}
@@ -28,10 +29,7 @@ Berdasarkan contoh tersebut, terdapat 6 cara untuk memasangkan variabel-variabel
 
 \tabl{smatch-matching}
   {sections/chapter-2/1-1-smatch-matching.csv}
-  {
-    Kombinasi pasangan dan kalkulasi F-Score kedua \AMR{} \citek{cai2013}.
-    Hasil skor SMATCH diambil dari nilai F-Score tertinggi, yaitu 0.73.
-  }
+  {Kombinasi pasangan \AMR{} dan kalkulasi F-Score \citek{cai2013}.}
 
 Karena kedua \AMR{} ini memiliki variabel yang berbeda dan tidak ada informasi mengenai hubungan antar variabel yang ada, perlu dicari semua kemungkinan dari pemetaan variabel yang ada.
 Dari seluruh pemetaan, nilai \SMATCH{} akan mengambil hasil yang memiliki f-score tertinggi.

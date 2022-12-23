@@ -47,6 +47,10 @@ Skema pelatihan yang digunakan hanya untuk yang melakukan \amrparsing{} dengan m
 Ilustrasi pelatihan dengan skema \ti{bilingual} dapat dilihat pada \cref{fig:3-bilingual-training-schema}
 Pelatihan dicoba dengan konfigurasi dengan dan tanpa \ti{concatenating}.
 Pada konfigurasi tanpa \ti{concatenating} tetap mengikuti teknik pelatihan sebelumnya yang dapat dilihat pada \cref{tab:3-pt-ft-strategies}.
+\code{$t/g$} merupakan teks/graf \ti{original}.
+\code{$\hat{t}/\hat{g}$} merupakan teks/graf yang \ti{noisy} (hasil \denoising{}).
+\code{$\bar{t}/\bar{g}$} merupakan teks/graf yang hilang.
+Semua output dari pelatihan ini adalah bentuk graf yang utuh.
 Sedangkan pada konfigurasi dengan \ti{concatenating}, diperlukan sedikit modifikasi untuk melakukan \pretraining{} graf pada teknik \gls{AMRBART}.
 Token \code{<s>} yang digunakan pada \gls{AMRBART} diganti menjadi kode bahasa yang digunakan.
 Bahasa Indonesia ditandai dengan token \code{<id>} dan Bahasa Inggris ditandai dengan token \code{<en>}.
@@ -68,13 +72,7 @@ FT,\code{$t\bar{g}2g$},\makecell[cl]{\sTagged{$a_1$,..,$a_n$}\graphMasked{}}
 \end{filecontents*}
 \tabl{3-pt-ft-strategies}
   {3-pt-ft-strategies.csv}
-  {
-    Strategi \pretraining{} (PT) dan \finetuning{} (FT) untuk pelatihan graf model \amrparsing{} lintas bahasa pada skema pelatihan \ti{bilingual}.
-    \code{$t/g$} merupakan teks/graf \ti{original}.
-    \code{$\hat{t}/\hat{g}$} merupakan teks/graf yang \ti{noisy} (hasil \denoising{}).
-    \code{$\bar{t}/\bar{g}$} merupakan teks/graf yang hilang.
-    Semua output dari pelatihan ini adalah bentuk graf yang utuh.
-  }
+  {Strategi \pretraining{} (PT) dan \finetuning{} (FT) untuk pelatihan graf model \amrparsing{} lintas bahasa pada skema pelatihan \ti{bilingual}.}
 
 \begin{filecontents*}{3-pt-ft-strategies-with-concat.csv}
 Phase,Task,Input
@@ -90,13 +88,7 @@ FT,\code{$t_{_{ID}}\bar{t}{_{_{EN}}}\bar{g}{}2g$},\makecell[cl]{\idTagged{$a_1$,
 \end{filecontents*}
 \tabl{3-pt-ft-strategies-with-concat}
   {3-pt-ft-strategies-with-concat.csv}
-  {
-    Strategi \pretraining{} (PT) dan \finetuning{} (FT) untuk pelatihan graf model \amrparsing{} lintas bahasa pada skema pelatihan \ti{bilingual} dengan konfigurasi \ti{concatenating}.
-    \code{$t/g$} merupakan teks/graf \ti{original}.
-    \code{$\hat{t}/\hat{g}$} merupakan teks/graf yang \ti{noisy} (hasil \denoising{}).
-    \code{$\bar{t}/\bar{g}$} merupakan teks/graf yang hilang.
-    Semua output dari pelatihan ini adalah bentuk graf yang utuh.
-  }
+  {Strategi \pretraining{} (PT) dan \finetuning{} (FT) untuk pelatihan graf model \amrparsing{} lintas bahasa pada skema pelatihan \ti{bilingual} dengan konfigurasi \ti{concatenating}.}
 
 Pembangunan data latih silver ketika \pretraining{} dilakukan \ti{masking} secara dinamis ketika melakukan training \citek{bai2022}.
 Fungsi \ti{noising} dilakukan secara acak untuk melakukan \ti{masking} sebuah subgraf, 15\% bagian untuk \ti{masking} simpul (konsep), dan/atau 15\% untuk \ti{masking} sisi (relasi).

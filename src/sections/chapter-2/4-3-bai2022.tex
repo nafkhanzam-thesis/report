@@ -33,6 +33,9 @@ Strategi \denoising{} level graf mengarahkan model untuk memprediksi sub-graf ya
   {Ilustrasi strategi pre-training: (1) \denoising{} level simpul/sisi (a->b); (2) \denoising{} level sub-graf (c->b) \citek{bai2022}.}
 
 Strategi \pretraining{} (P.T.) dan \finetuning{} (F.T.) dapat dilihat pada \cref{tab:4-3-pt-ft-strategies}.
+\code{$t/g$} merupakan teks/graf \ti{original}.
+\code{$\hat{t}/\hat{g}$} merupakan teks/graf yang \ti{noisy} (hasil \denoising{}).
+\code{$\bar{t}/\bar{g}$} merupakan teks/graf yang hilang.
 Token \code{<s>} dan \code{<g>} digunakan untuk membedakan informasi teks dan graf pada input.
 \Pretraining{} dilakukan dengan menghapus sebagian dari input teks/graf dengan teknik \denoising{}.
 \Finetuning{} dilakukan dengan menghapus keseluruhan dari teks/graf yang dituju.
@@ -41,9 +44,4 @@ Namun, pada unified \pretraining{} dan \finetuning{}, input berupa kedua teks da
 
 \tabl{4-3-pt-ft-strategies}
   {sections/chapter-2/4-3-pt-ft-strategies.csv}
-  {
-    Strategi \pretraining{} (P.T.) dan \finetuning{} (F.T.) untuk pelatihan graf \citek{bai2022}.
-    \code{$t/g$} merupakan teks/graf \ti{original}.
-    \code{$\hat{t}/\hat{g}$} merupakan teks/graf yang \ti{noisy} (hasil \denoising{}).
-    \code{$\bar{t}/\bar{g}$} merupakan teks/graf yang hilang.
-  }
+  {Strategi \pretraining{} (P.T.) dan \finetuning{} (F.T.) untuk pelatihan graf \citek{bai2022}.}
