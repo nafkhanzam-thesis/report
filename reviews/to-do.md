@@ -11,3 +11,5 @@
 - [x] Plan the preprocess steps.
 - [x] Plan threshold filter for silver data from translation.
 - [x] Shorten captions.
+- [x] Split the dataset construction process diagram.
+- [ ] Plan translation divergence qualitative analysis process.

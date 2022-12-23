@@ -4,9 +4,10 @@
 Pada masalah kurangnya jumlah dataset yang digunakan sebagai data latih model, dibangun kumpulan dataset silver untuk pelatihan model \amrparsing{} lintas bahasa.
 Diagram alur keseluruhan proses konstruksi dataset gold dan silver dapat dilihat pada \cref{fig:3-dataset-construction}.
 Alur proses konstruksi dataset berkualitas silver mengikuti framework augmentasi data oleh \textcite{lee2022}.
+Bagian 80\% dari dataset silver akan digunakan sebagai data latih dan bagian 20\% akan digunakan sebagai data validasi.
 
-\fig[1]{3-dataset-construction}
-  {sections/chapter-3/3-dataset-construction.png}
+\figpdf[1][4]{3-dataset-construction}
+  {drawio.pdf}
   {Diagram alur untuk konstruksi dataset gold dan silver dari korpus paralel dan dataset AMR.}
 
 % Dataset Silver Parallel Corpora
@@ -14,6 +15,11 @@ Korpus paralel PANL-BPPT dan IWSLT2017 digunakan sebagai dataset pasangan kalima
 Kalimat berbahasa Inggris dari korpus paralel diubah menjadi graf \AMR{}.
 Model \amrparsing{} yang digunakan adalah teknik \ti{ensembling} dari 5 model \sota{} \citek{lee2022}.
 Hasil graf \AMR{} yang dihasilkan akan digunakan sebagai dataset latih berkualitas silver.
+Diagram alur untuk konstruksi dataset par silver dari korpus paralel dapat dilihat pada \cref{fig:3-dataset-par-silver-construction}.
+
+\figpdf[0.5][7]{3-dataset-par-silver-construction}
+  {drawio.pdf}
+  {Diagram alur untuk konstruksi dataset par silver dari korpus paralel.}
 
 % Dataset Silver AMR 3.0
 Dataset \AMR{} berkualitas gold yang digunakan adalah Dataset AMR 3.0 (LDC2020T02).
@@ -27,14 +33,24 @@ Maka akan terdapat dua pasangan kalimat berbahasa Inggris dan Indonesia untuk sa
 Dua pasangan tersebut dilakukan \ti{cross join} untuk menghasilkan empat pasang data latih berkualitas silver.
 
 % Quality measurement and filtration.
-Kumpulan semua dataset silver tersebut kemudian dilakukan filtrasi dengan algoritma 1-NN dengan \cossim{} sebagai fungsi jarak antar representasi kalimatnya.
-Hasil filtrasi yang dihasilkan akan digunakan sebagai dataset latih.
-Dataset latih tersebut juga dihitung kualitasnya menggunakan rata-rata \cossim{}.
+Dataset trans silver tersebut kemudian dilakukan filtrasi dengan algoritma 1-NN dengan \cossim{} sebagai fungsi jarak antar representasi kalimatnya.
+Dataset tersebut juga dihitung kualitasnya menggunakan rata-rata \cossim{}.
+Diagram alur untuk konstruksi dataset trans silver dari AMR 3.0 dapat dilihat pada \cref{fig:3-dataset-trans-silver-construction}.
+
+\figpdf[0.5][6]{3-dataset-trans-silver-construction}
+  {drawio.pdf}
+  {Diagram alur untuk konstruksi dataset trans silver dari AMR 3.0.}
 
 % Dataset Gold
-Augmentasi data untuk konstruksi dataset berkualitas gold mengambil bagian Test \ti{split} dari AMR 3.0.
+Augmentasi data untuk konstruksi dataset berkualitas gold mengambil bagian Test \ti{split} dari AMR 2.0.
+Dataset AMR 2.0 digunakan supaya dapat hasil kinerja model dapat dikomparasikan dengan penelitian \textcite{putra2022}.
 Bagian kalimat berbahasa Inggris dari Test \ti{split} ditranslasi menjadi Bahasa Indonesia oleh ahli.
 Hasil kalimat berbahasa Indonesia tersebut berkualitas gold dan digunakan sebagai dataset test.
+Diagram alur untuk konstruksi dataset gold dari AMR 2.0 dapat dilihat pada \cref{fig:3-dataset-gold-construction}.
+
+\figpdf[0.5][5]{3-dataset-gold-construction}
+  {drawio.pdf}
+  {Diagram alur untuk konstruksi dataset gold dari AMR 2.0.}
 
 \newcommand\graphMasked{\codesm{\textcolor[rgb]{0,.33,0}{<g>$g_1$,..[mask]..,$g_m$</g>}}}
 \newcommand\graphBarMasked{\codesm{\textcolor[rgb]{0,.33,0}{<g>[mask]</g>}}}
@@ -59,8 +75,8 @@ Strategi \pretraining{} dan \finetuning{} untuk pelatihan graf model \amrparsing
 Output dari pelatihan tersebut merupakan graf \AMR{} yang dilinearisasi, yaitu \code{<g>$g_1$,..,$g_m$</g>}.
 Linearisasi graf menggunakan algoritma \gls{DFS} \citek{bevilacqua2021}.
 
-\fig[0.6]{3-bilingual-training-schema}
-  {sections/chapter-3/3-bilingual-training-schema.png}
+\figpdf[0.6][2]{3-bilingual-training-schema}
+  {drawio.pdf}
   {Pelatihan dengan skema \ti{bilingual}.}
 
 \begin{filecontents*}{3-pt-ft-strategies.csv}

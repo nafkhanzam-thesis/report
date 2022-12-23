@@ -395,6 +395,14 @@ Desember\fi~\number\year}
     \label{fig:#2}
   \end{figure}
 }
+\NewDocumentCommand{\figpdf}{O{0.5} O{1} m m m}{
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=#1\textwidth,page=#2]{#4}
+    \caption{#5}
+    \label{fig:#3}
+  \end{figure}
+}
 
 \usepackage{xcolor, color, soul}
 \sethlcolor{red}
