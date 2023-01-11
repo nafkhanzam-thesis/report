@@ -7,7 +7,7 @@ Alur proses konstruksi dataset berkualitas silver mengikuti framework augmentasi
 Bagian 80\% dari dataset silver akan digunakan sebagai data latih dan bagian 20\% akan digunakan sebagai data validasi.
 
 \figpdf[1][4]{3-dataset-construction}
-  {drawio.pdf}
+  {resources/diagrams.pdf}
   {Diagram alur untuk konstruksi dataset gold dan silver dari korpus paralel dan dataset AMR.}
 
 % Dataset Silver Parallel Corpora
@@ -18,7 +18,7 @@ Hasil graf \AMR{} yang dihasilkan akan digunakan sebagai dataset latih berkualit
 Diagram alur untuk konstruksi dataset par silver dari korpus paralel dapat dilihat pada \cref{fig:3-dataset-par-silver-construction}.
 
 \figpdf[0.5][7]{3-dataset-par-silver-construction}
-  {drawio.pdf}
+  {resources/diagrams.pdf}
   {Diagram alur untuk konstruksi dataset par silver dari korpus paralel.}
 
 % Dataset Silver AMR 3.0
@@ -38,7 +38,7 @@ Dataset tersebut juga dihitung kualitasnya menggunakan rata-rata \cossim{}.
 Diagram alur untuk konstruksi dataset trans silver dari AMR 3.0 dapat dilihat pada \cref{fig:3-dataset-trans-silver-construction}.
 
 \figpdf[0.5][6]{3-dataset-trans-silver-construction}
-  {drawio.pdf}
+  {resources/diagrams.pdf}
   {Diagram alur untuk konstruksi dataset trans silver dari AMR 3.0.}
 
 % Dataset Gold
@@ -49,7 +49,7 @@ Hasil kalimat berbahasa Indonesia tersebut berkualitas gold dan digunakan sebaga
 Diagram alur untuk konstruksi dataset gold dari AMR 2.0 dapat dilihat pada \cref{fig:3-dataset-gold-construction}.
 
 \figpdf[0.5][5]{3-dataset-gold-construction}
-  {drawio.pdf}
+  {resources/diagrams.pdf}
   {Diagram alur untuk konstruksi dataset gold dari AMR 2.0.}
 
 \newcommand\graphMasked{\codesm{\textcolor[rgb]{0,.33,0}{<g>$g_1$,..[mask]..,$g_m$</g>}}}
@@ -76,7 +76,7 @@ Output dari pelatihan tersebut merupakan graf \AMR{} yang dilinearisasi, yaitu \
 Linearisasi graf menggunakan algoritma \gls{DFS} \citek{bevilacqua2021}.
 
 \figpdf[0.6][2]{3-bilingual-training-schema}
-  {drawio.pdf}
+  {resources/diagrams.pdf}
   {Pelatihan dengan skema \ti{bilingual}.}
 
 \begin{filecontents*}{3-pt-ft-strategies.csv}
