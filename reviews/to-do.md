@@ -13,3 +13,4 @@
 - [x] Shorten captions.
 - [x] Split the dataset construction process diagram.
 - [ ] Plan translation divergence qualitative analysis process.
+- [ ] Describe that in pre-training phase, text output tasks are still used.
