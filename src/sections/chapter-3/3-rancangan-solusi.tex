@@ -4,14 +4,13 @@
 Pada masalah kurangnya jumlah dataset yang digunakan sebagai data latih model, dibangun kumpulan dataset silver untuk pelatihan model \amrparsing{} lintas bahasa.
 Diagram alur keseluruhan proses konstruksi dataset gold dan silver dapat dilihat pada \cref{fig:3-dataset-construction}.
 Alur proses konstruksi dataset berkualitas silver mengikuti framework augmentasi data oleh \textcite{lee2022}.
-Bagian 80\% dari dataset silver akan digunakan sebagai data latih dan bagian 20\% akan digunakan sebagai data validasi.
 
 \figpdf[1][4]{3-dataset-construction}
   {resources/diagrams.pdf}
   {Diagram alur untuk konstruksi dataset gold dan silver dari korpus paralel dan dataset AMR.}
 
 % Dataset Silver Parallel Corpora
-Korpus paralel PANL-BPPT dan IWSLT2017 digunakan sebagai dataset pasangan kalimat Bahasa Inggris dan Bahasa Indonesia.
+Korpus paralel PANL-BPPT dan IWSLT17 digunakan sebagai dataset pasangan kalimat Bahasa Inggris dan Bahasa Indonesia.
 Kalimat berbahasa Inggris dari korpus paralel diubah menjadi graf \AMR{}.
 Model \amrparsing{} yang digunakan adalah teknik \ti{ensembling} dari 5 model \sota{} \citek{lee2022}.
 Hasil graf \AMR{} yang dihasilkan akan digunakan sebagai dataset latih berkualitas silver.
@@ -26,15 +25,16 @@ Dataset \AMR{} berkualitas gold yang digunakan adalah Dataset AMR 3.0 (LDC2020T0
 Augmentasi data untuk konstruksi dataset berkualitas silver mengambil bagian Train dan Dev \ti{split} dari AMR 3.0.
 Kalimat berbahasa Inggris dari dataset \AMR{} tersebut diubah menjadi kalimat berbahasa Indonesia dengan menggunakan mesin translasi.
 Model mesin translasi yang digunakan adalah model {OPUS-MT} \citek{tiedemann2020}.
-Graf \AMR{} berkualitas gold juga dilakukan \ti{parsing} menjadi kalimat berbahasa Inggris (AMR-to-text) untuk menambah jumlah variasi pasangan dataset.
-Model AMR-to-text yang digunakan adalah \gls{AMRBART}.
+Graf \AMR{} berkualitas gold juga dilakukan \ti{parsing} menjadi kalimat berbahasa Inggris (\AMRtoTEXT{}) untuk menambah jumlah variasi pasangan dataset.
+Model \AMRtoTEXT{} yang digunakan adalah \gls{AMRBART}.
 Kalimat berbahasa Inggris hasil \ti{parsing} tersebut juga diubah menjadi kalimat berbahasa Indonesia dengan menggunakan mesin translasi.
 Maka akan terdapat dua pasangan kalimat berbahasa Inggris dan Indonesia untuk satu buah graf \AMR{}.
 Dua pasangan tersebut dilakukan \ti{cross join} untuk menghasilkan empat pasang data latih berkualitas silver.
 
 % Quality measurement and filtration.
 Dataset trans silver tersebut kemudian dilakukan filtrasi dengan algoritma 1-NN dengan \cossim{} sebagai fungsi jarak antar representasi kalimatnya.
-Dataset tersebut juga dihitung kualitasnya menggunakan rata-rata \cossim{}.
+Dataset tersebut dihitung kualitasnya menggunakan rata-rata \cossim{} antara kalimat berbahasa Inggris dan kalimat berbahasa Indonesia-nya.
+Kualitas kalimat alternatif dan translasi juga dihitung dengan skor \BLEU{} antara kalimat berbahasa Inggris dengan alternatif kalimat berbahasa Inggris dari \AMRtoTEXT{} dan translasi kembali dari kalimat berbahasa Indonesia.
 Diagram alur untuk konstruksi dataset trans silver dari AMR 3.0 dapat dilihat pada \cref{fig:3-dataset-trans-silver-construction}.
 
 \figpdf[0.5][6]{3-dataset-trans-silver-construction}

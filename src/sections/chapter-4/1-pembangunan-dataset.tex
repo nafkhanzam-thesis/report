@@ -1,0 +1,71 @@
+\section{Pembangunan Dataset}
+
+Pelatihan model \amrparsing{} membutuhkan dataset \ti{train}, \ti{dev}, dan \ti{test}.
+Setiap data yang diperlukan adalah pasangan graf \AMR{}, kalimat berbahasa Inggris, dan kalimat berbahasa Indonesia.
+Sumber dataset yang digunakan adalah AMR 3.0 train split, AMR 3.0 dev split, AMR 2.0 test split, Korpus paralel PANL-BPPT, dan Korpus paralel IWSLT17.
+AMR 2.0 test split juga termasuk kalimat berbahasa Indonesia hasil translasi ahli yang didapat dari penelitian \textcite{putra2022}.
+Jenis data dan tahapan pembangunan masing-masing dataset dapat dilihat pada \cref{tab:4.1.original-dataset}.
+
+\begin{filecontents*}{4.1.original-dataset.csv}
+  Split,Dataset,Jumlah,AMR,EN,ID
+  \makecell[l]{Train},\makecell[l]{PANL-BPPT},\makecell[r]{24,024},,\checkmark{},\checkmark{}
+  \makecell[l]{Train},\makecell[l]{IWSLT17},\makecell[r]{107,329},,\checkmark{},\checkmark{}
+  \makecell[l]{Train},\makecell[l]{AMR 3.0 Train},\makecell[r]{55,635},\checkmark{},\checkmark{},
+  \makecell[l]{Dev},\makecell[l]{AMR 3.0 Dev},\makecell[r]{1,722},\checkmark{},\checkmark{},
+  \makecell[l]{Test},\makecell[l]{AMR 2.0 Test},\makecell[r]{1,371},\checkmark{},\checkmark{},\checkmark{}
+\end{filecontents*}
+\tabl{4.1.original-dataset}
+  {4.1.original-dataset.csv}
+  {Detail ketersediaan data dari masing-masing dataset.}
+
+Tahapan yang dilakukan dalam membangun pasangan graf \AMR{}, kalimat berbahasa Inggris, dan kalimat berbahasa Indonesia dari kumpulan dataset tersebut adalah:
+
+\begin{enumerate}
+  \item Melakukan \amrparsing{} kalimat berbahasa Inggris dari Korpus paralel PANL-BPPT dan Korpus paralel IWSLT17 menggunakan algoritma MBSE \citek{lee2022}.
+  Proses ini menghasilkan \AMR{} dengan format PENMAN (\code{AMR}).
+  \item Melinearisasi semua graf \AMR{} dengan format DFS (\code{AMR-DFS}).
+  \item Melakukan \AMRtoTEXT{} graf \AMR{} dari dataset AMR 3.0 Train dan AMR 3.0 Dev untuk mendapatkan alternatif kalimat berbahasa Inggris (\code{EN-ALT}).
+  \item Melakukan translasi semua kalimat berbahasa Inggris original dan alternatif dari dataset AMR 3.0 Train dan AMR 3.0 Dev menjadi kalimat berbahasa Indonesia (\code{ID} dan \code{ID-ALT}).
+  \item Melakukan translasi kembali semua kalimat berbahasa Indonesia dari tahap 4 menjadi kalimat berbahasa Inggris (\code{EN-BACK} dan \code{EN-ALT-BACK}).
+\end{enumerate}
+
+Tahapan pembangunan kalimat alternatif menggunakan \AMRtoTEXT{} menambah jumlah AMR 3.0 Train dan AMR 3.0 Dev menjadi dua kali lipat, yaitu 111,270 dan 3,444.
+Hasil dataset yang dibangun kemudian dievaluasi dan difiltrasi dari yang buruk untuk mendapatkan kualitas dataset yang baik sebagai data latih.
+Dataset yang dilakukan evaluasi dan filtrasi adalah AMR 3.0 Train dan AMR 3.0 Dev.
+Evaluasi kualitas dataset dilakukan dengan menghitung tiga jenis skor evaluasi sebagai berikut:
+
+\begin{enumerate}
+  \item \Cossim{} dari \ti{sentence embedding} kalimat berbahasa Indonesia dan kalimat berbahasa Inggris menggunakan \gls{LABSE}: \code{EN} dengan \code{ID} dan \code{EN-ALT} dengan \code{ID-ALT}.
+  \item Peringkat \ti{nearest neighbor} kedekatan \ti{sentence embedding} dari kalimat berbahasa Indonesia dengan pasangan kalimat berbahasa Inggris dibandingkan dengan kalimat berbahasa Inggris lainnya: \code{ID} dengan \code{EN} dan \code{ID-ALT} dengan \code{EN-ALT}.
+  \item Skor \BLEU{} dari pasangan kalimat berbahasa Inggris dan kalimat berbahasa Inggris hasil translasi kembali dari Bahasa Indonesia: \code{EN} dengan \code{EN-BACK} dan \code{EN-ALT} dengan \code{EN-ALT-BACK}.
+  \item Skor \BLEU{} dari pasangan kalimat berbahasa Inggris dan kalimat alternatif berbahasa Inggris dari hasil \AMRtoTEXT{}: \code{EN} dengan \code{EN-ALT}.
+\end{enumerate}
+
+Berdasarkan hasil evaluasi tersebut dilakukan filtrasi data untuk menghasilkan kualitas data latih yang lebih baik.
+Filtrasi-filtrasi data yang dilakukan adalah sebagai berikut:
+
+\begin{enumerate}
+  \item Skor \BLEU{} antara \code{EN} dan \code{EN-ALT} di antara 0.1 dan 0.9 dengan tujuan menghindari kalimat alternatif yang terlalu mirip dan yang terlalu berbeda \citek{lee2022}.
+  \item Peringkat \ti{nearest neighbor} kedekatan \ti{sentence embedding} dari kalimat berbahasa Indonesia dengan pasangan kalimat berbahasa Inggris dibandingkan dengan kalimat berbahasa Inggris lainnya yang memiliki kedekatan peringkat satu (\gls{1-NN}) \citek{blloshmi2020}.
+\end{enumerate}
+
+Hasil evaluasi sebelum dilakukan filtrasi dapat dilihat pada \cref{tab:4.1.before-filtration}.
+Hasil evaluasi setelah dilakukan filtrasi dapat dilihat pada \cref{tab:4.1.after-filtration}.
+
+\begin{filecontents*}{4.1.before-filtration.csv}
+  Dataset,Jumlah,Cosine Similarity,BLEU-back,BLEU-alt
+  \makecell[l]{AMR 3.0 Train},\makecell[r]{111,270},0,0,0
+  \makecell[l]{AMR 3.0 Dev},\makecell[r]{3,444},0,0,0
+\end{filecontents*}
+\tabl{4.1.before-filtration}
+  {4.1.before-filtration.csv}
+  {Hasil evaluasi dataset sebelum dilakukan filtrasi.}
+
+\begin{filecontents*}{4.1.after-filtration.csv}
+  Dataset,Jumlah,Cosine Similarity,BLEU-back,BLEU-alt
+  \makecell[l]{AMR 3.0 Train},\makecell[r]{55,635},0,0,0
+  \makecell[l]{AMR 3.0 Dev},\makecell[r]{1,722},0,0,0
+\end{filecontents*}
+\tabl{4.1.after-filtration}
+  {4.1.after-filtration.csv}
+  {Hasil evaluasi dataset sebelum dilakukan filtrasi.}

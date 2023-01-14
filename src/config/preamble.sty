@@ -333,9 +333,13 @@ Desember\fi~\number\year}
 \usepackage[noabbrev,capitalise]{cleveref}
 \crefname{figure}{Gambar}{Gambar}
 \Crefname{figure}{Gambar}{Gambar}
+\crefname{table}{Tabel}{Tabel}
+\Crefname{table}{Tabel}{Tabel}
 \crefname{equation}{Persamaan}{Persamaan}
 \Crefname{equation}{Persamaan}{Persamaan}
 
+\usepackage[flushleft]{threeparttable}
+\usepackage{adjustbox}
 \usepackage{csvsimple}
 \makeatletter
 \csvset{
@@ -379,12 +383,12 @@ Desember\fi~\number\year}
     \label{tab:#2}
     \centering
     \catcode`\%=12
-    \csvloop{#1={#3}}
+    \begin{adjustbox}{max width=\textwidth}
+      \csvloop{#1={#3}}
+    \end{adjustbox}
   \end{table}
 }
 
-% \newcommand{\glsfi}[1]{\textit{\glsdesc{#1}} (\gls{#1})}
-% \newcommand{\glsf}[1]{\glsdesc{#1} (\gls{#1})}
 \newcommand{\citek}[1]{(\cite{#1})}
 \newcommand{\quotei}[1]{"\textit{#1}"}
 \NewDocumentCommand{\fig}{O{0.5} m m m}{
@@ -431,3 +435,6 @@ Desember\fi~\number\year}
     \end{algorithmic}
   \end{algorithm}
 }
+
+\usepackage{tikz}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
