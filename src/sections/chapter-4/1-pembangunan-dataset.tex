@@ -51,6 +51,7 @@ Filtrasi-filtrasi data yang dilakukan adalah sebagai berikut:
 
 Hasil evaluasi sebelum dilakukan filtrasi dapat dilihat pada \cref{tab:4.1.before-filtration}.
 Hasil evaluasi setelah dilakukan filtrasi dapat dilihat pada \cref{tab:4.1.after-filtration}.
+Jumlah total data untuk masing-masing split (train, dev, dan test) yang digunakan sebagai data pelatihan model dapat dilihat pada \cref{tab:4.1.total-dataset-count}.
 
 \begin{filecontents*}{4.1.before-filtration.csv}
   Dataset,Jumlah,Cosine Similarity,BLEU-back,BLEU-alt
@@ -69,3 +70,15 @@ Hasil evaluasi setelah dilakukan filtrasi dapat dilihat pada \cref{tab:4.1.after
 \tabl{4.1.after-filtration}
   {4.1.after-filtration.csv}
   {Hasil evaluasi dataset sebelum dilakukan filtrasi.}
+
+\begin{filecontents*}{4.1.total-dataset-count.csv}
+  Split,Dataset,Jumlah,Total
+  \makecell[l]{Train},\makecell[l]{PANL-BPPT},\makecell[r]{24,024},\makecell[r]{0}
+  ,\makecell[l]{IWSLT17},\makecell[r]{107,329},
+  ,\makecell[l]{AMR 3.0 Train},\makecell[r]{0},
+  \makecell[l]{Dev},\makecell[l]{AMR 3.0 Dev},\makecell[r]{0},\makecell[r]{0}
+  \makecell[l]{Test},\makecell[l]{AMR 2.0 Test},\makecell[r]{1,371},\makecell[r]{1,371}
+\end{filecontents*}
+\tabl{4.1.total-dataset-count}
+  {4.1.total-dataset-count.csv}
+  {Jumlah total masing-masing split dataset.}
