@@ -54,29 +54,29 @@ Hasil evaluasi setelah dilakukan filtrasi dapat dilihat pada \cref{tab:4.1.after
 Jumlah total data untuk masing-masing split (train, dev, dan test) yang digunakan sebagai data pelatihan model dapat dilihat pada \cref{tab:4.1.total-dataset-count}.
 
 \begin{filecontents*}{4.1.before-filtration.csv}
-  Dataset,Jumlah,Cosine Similarity,BLEU-back,BLEU-alt
-  \makecell[l]{AMR 3.0 Train},\makecell[r]{111,270},0,0,0
-  \makecell[l]{AMR 3.0 Dev},\makecell[r]{3,444},0,0,0
+  Dataset,Jumlah,Cosine Similarity,BLEU-back
+  \makecell[l]{AMR 3.0 Train},\makecell[r]{111,270},0.799778,44.28519
+  \makecell[l]{AMR 3.0 Dev},\makecell[r]{3,444},0.863371,47.12555
 \end{filecontents*}
 \tabl{4.1.before-filtration}
   {4.1.before-filtration.csv}
   {Hasil evaluasi dataset sebelum dilakukan filtrasi.}
 
 \begin{filecontents*}{4.1.after-filtration.csv}
-  Dataset,Jumlah,Cosine Similarity,BLEU-back,BLEU-alt
-  \makecell[l]{AMR 3.0 Train},\makecell[r]{55,635},0,0,0
-  \makecell[l]{AMR 3.0 Dev},\makecell[r]{1,722},0,0,0
+  Dataset,Jumlah,Cosine Similarity,BLEU-back
+  \makecell[l]{AMR 3.0 Train},\makecell[r]{92,867},0.881773,45.37009
+  \makecell[l]{AMR 3.0 Dev},\makecell[r]{3,069},0.886295,46.28209
 \end{filecontents*}
 \tabl{4.1.after-filtration}
   {4.1.after-filtration.csv}
-  {Hasil evaluasi dataset sebelum dilakukan filtrasi.}
+  {Hasil evaluasi dataset setelah dilakukan filtrasi.}
 
 \begin{filecontents*}{4.1.total-dataset-count.csv}
   Split,Dataset,Jumlah,Total
-  \makecell[l]{Train},\makecell[l]{PANL-BPPT},\makecell[r]{24,024},\makecell[r]{0}
+  \makecell[l]{Train},\makecell[l]{PANL-BPPT},\makecell[r]{24,024},\makecell[r]{224,220}
   ,\makecell[l]{IWSLT17},\makecell[r]{107,329},
-  ,\makecell[l]{AMR 3.0 Train},\makecell[r]{0},
-  \makecell[l]{Dev},\makecell[l]{AMR 3.0 Dev},\makecell[r]{0},\makecell[r]{0}
+  ,\makecell[l]{AMR 3.0 Train},\makecell[r]{92,867},
+  \makecell[l]{Dev},\makecell[l]{AMR 3.0 Dev},\makecell[r]{3,069},\makecell[r]{3,069}
   \makecell[l]{Test},\makecell[l]{AMR 2.0 Test},\makecell[r]{1,371},\makecell[r]{1,371}
 \end{filecontents*}
 \tabl{4.1.total-dataset-count}
