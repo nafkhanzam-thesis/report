@@ -1,0 +1,22 @@
+\section{Pengujian}
+
+%~ Baseline
+
+\begin{filecontents*}{4.3.baseline-evaluation.csv}
+  {},Precision,Recall,F1
+  \makecell[l]{Smatch},0.240,0.230,0.235
+  \makecell[l]{Unlabeled},0.299,0.287,0.293
+  \makecell[l]{No WSD},0.240,0.231,0.235
+  \makecell[l]{Non-sense-frames},0.089,0.090,0.090
+  \makecell[l]{Wikification},0.106,0.102,0.104
+  \makecell[l]{Named Ent.},0.317,0.308,0.312
+  \makecell[l]{Negations},0.073,0.081,0.077
+  \makecell[l]{IgnoreVars},0.070,0.068,0.069
+  \makecell[l]{Concepts},0.186,0.179,0.182
+  \makecell[l]{Frames},0.087,0.087,0.087
+  \makecell[l]{Reentrancies},0.164,0.163,0.163
+  \makecell[l]{SRL},0.202,0.204,0.203
+\end{filecontents*}
+\tabl{4.3.baseline-evaluation}
+  {4.3.baseline-evaluation.csv}
+  {Hasil evaluasi \ti{baseline} dengan metode \ti{translate and parse}.}
