@@ -1,6 +1,8 @@
 #! /bin/bash
 
-OUTDIR=build/main
+PROJECT=${1:-main}
+
+OUTDIR=build/$PROJECT
 
 mkdir -p $OUTDIR
 
@@ -9,4 +11,4 @@ tectonic -X compile \
   -o $OUTDIR \
   --pass default \
   -Z shell-escape \
-  src/main.tex
+  src/$PROJECT.tex

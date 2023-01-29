@@ -14,11 +14,29 @@
   (Program Studi Magister Informatika)\\[3em]
 \end{center}
 
-Abstract first paragraph.\\
+% persoalan
+\Gls{AMR} merupakan salah satu representasi yang memperhatikan semantik dari sebuah teks.
+\amrparsing{} untuk kalimat berbahasa Indonesia telah dikembangkan untuk \ti{parsing} berbasis aturan, \ti{dependency parser}, dan \crosslingual{}.
+Anotasi AMR berbahasa Indonesia masih memiliki konsep dan relasi yang terbatas sehingga \AMR{} berbahasa Inggris digunakan.
+Pendekatan \crosslingual{} mengubah kalimat berbahasa Indonesia menjadi \AMR{} berbahasa Inggris.
+Penelitian sebelumnya menggunakan teknik pelatihan bilingual yaitu menggunakan dataset berbahasa Indonesia dan Inggris.
+Penelitian sebelumnya menggunakan dataset AMR 2.0 dan korpus paralel PANL-BPPT dan belum dilakukan filtrasi data untuk meningkatkan kualitasnya.
+Model yang digunakan pada penelitian sebelumnya bukan lagi merupakan model \sota{}.
 
-Abstract second paragraph.\\
+% metodologi
+Tahap awal dilakukan analisis permasalahan dalam melakukan \amrparsing{} dalam Bahasa Indonesia.
+Hal ini dilakukan dengan mendalami materi mengenai teknik-teknik \amrparsing{} yang ada sebelumnya dan membandingkan hasil kinerjanya.
+Kemudian dilakukan perancangan dan implementasi berdasarkan hasil analisis teknik-teknik \amrparsing{} sebelumnya.
+Dirancang sebuah solusi dengan menggunakan beberapa gabungan teknik dan model tersebut.
+Lalu dilakukan implementasi dari rancangan tersebut dengan melakukan training model terhadap dataset yang tersedia.
+Hasil implementasi sebelumnya diuji dan dievaluasi secara kuantitatif dengan menggunakan metrik SMATCH untuk dibandingkan hasilnya dengan teknik sebelumnya.
+Hasil \amrparsing{} juga dievaluasi secara kualitatif dengan analisis divergensi translasi.
+Evaluasi secara kuantitatif dan kualitatif tersebut digunakan untuk kesimpulan kelayakan model \amrparsing{} cross-lingual untuk kalimat berbahasa Indonesia.
 
-Abstract third paragraph.\\
+% solusi global
+Pada penelitian ini dibangun model \amrparsing{} \crosslingual{} menggunakan teknik training AMRBART dengan model mBART dan mT5.
+Dataset yang digunakan untuk \ti{training} adalah AMR 3.0 dan korpus paralel PANL-BPPT dan IWSLT17.
+Teknik \ti{training} AMRBART juga dikombinasikan dengan teknik \ti{training} translation language model dengan tersedianya korpus paralel pasangan kalimat berbahasa Indonesia dan Inggris.
 
-\noindent Kata kunci: kata, kunci
+\noindent Kata kunci: \ti{abstract meaning representation}, \crosslingual{}, \ti{parsing}
 \end{spacing}

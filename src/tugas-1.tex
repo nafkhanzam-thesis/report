@@ -1,0 +1,23 @@
+% sets document class
+\documentclass[12pt, onecolumn, oneside, a4paper, hidelinks]{report}
+
+% latex metadatas
+\input{config/preamble.sty}
+\input{config/variables.tex}
+
+\begin{document}
+  \sloppy
+
+  % covers
+  \input{sections/cover.tex}
+
+  \pagenumbering{roman}
+  \setcounter{page}{0}
+
+  \input{sections/abstrak.tex}
+
+  \clearpage
+  \input{tugas-1/_index.tex}
+
+  \input{sections/bibliography.tex}
+\end{document}
