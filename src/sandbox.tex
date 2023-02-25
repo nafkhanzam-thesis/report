@@ -1,0 +1,20 @@
+% sets document class
+\documentclass[12pt, onecolumn, oneside, a4paper, hidelinks]{report}
+
+% latex metadatas
+\input{config/preamble.sty}
+\input{config/variables.tex}
+
+\begin{document}
+
+\begin{filecontents*}{sandbox-table-1.csv}
+  Dataset,AMR,EN,TgtLang
+  \makecell[l]{par},Silver,Gold,Gold
+  \makecell[l]{trans},Gold,Gold,Silver
+  \makecell[l]{amr},Gold,Gold,Gold
+\end{filecontents*}
+\tabl{sandbox-table-1}
+  {sandbox-table-1.csv}
+  {}
+
+\end{document}
