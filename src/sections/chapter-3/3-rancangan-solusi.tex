@@ -2,12 +2,12 @@
 
 % General Dataset Construction
 Pada masalah kurangnya jumlah dataset yang digunakan sebagai data latih model, dibangun kumpulan dataset silver untuk pelatihan model \amrparsing{} lintas bahasa.
-Diagram alur keseluruhan proses konstruksi dataset gold dan silver dapat dilihat pada \cref{fig:3-dataset-construction}.
+Diagram alur keseluruhan proses konstruksi dataset pre-train, train, dev, dan test dapat dilihat pada \cref{fig:3-dataset-construction}.
 Alur proses konstruksi dataset berkualitas silver mengikuti framework augmentasi data oleh \textcite{lee2022}.
 
 \figpdf[1][4]{3-dataset-construction}
   {resources/diagrams.pdf}
-  {Diagram alur untuk konstruksi dataset gold dan silver dari korpus paralel dan dataset AMR.}
+  {Diagram alur untuk konstruksi dataset pre-train, train, dev, dan test dari korpus paralel dan dataset AMR.}
 
 % Dataset Silver Parallel Corpora
 Korpus paralel PANL-BPPT dan IWSLT17 digunakan sebagai dataset pasangan kalimat Bahasa Inggris dan Bahasa Indonesia.

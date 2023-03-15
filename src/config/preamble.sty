@@ -378,7 +378,7 @@ Desember\fi~\number\year}
 \newcommand{\csvnormal}[2][]{\csvloop{normal={#2},#1}}
 \newcommand{\csvdashed}[2][]{\csvloop{dashed={#2},#1}}
 \NewDocumentCommand{\tabl}{O{normal} m m m}{
-  \begin{table}[h]
+  \begin{table}[hbt!]
     \caption{#4}
     \label{tab:#2}
     \centering
@@ -392,7 +392,7 @@ Desember\fi~\number\year}
 \newcommand{\citek}[1]{(\cite{#1})}
 \newcommand{\quotei}[1]{"\textit{#1}"}
 \NewDocumentCommand{\fig}{O{0.5} m m m}{
-  \begin{figure}[h]
+  \begin{figure}[hbt!]
     \centering
     \includegraphics[width=#1\textwidth]{#3}
     \caption{#4}
@@ -400,7 +400,7 @@ Desember\fi~\number\year}
   \end{figure}
 }
 \NewDocumentCommand{\figpdf}{O{0.5} O{1} m m m}{
-  \begin{figure}[h]
+  \begin{figure}[hbt!]
     \centering
     \includegraphics[width=#1\textwidth,page=#2]{#4}
     \caption{#5}
