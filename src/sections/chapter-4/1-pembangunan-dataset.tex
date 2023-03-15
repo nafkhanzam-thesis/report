@@ -8,9 +8,9 @@ Jenis data dan tahapan pembangunan masing-masing dataset dapat dilihat pada \cre
 
 \begin{filecontents*}{4.1.original-dataset.csv}
   Split,Dataset,Jumlah,AMR,EN,ID
-  \makecell[l]{Train},\makecell[l]{PANL-BPPT},\makecell[r]{24,024},,\checkmark{},\checkmark{}
+  \makecell[l]{Pre-train},\makecell[l]{PANL-BPPT},\makecell[r]{24,024},,\checkmark{},\checkmark{}
   ,\makecell[l]{IWSLT17},\makecell[r]{107,329},,\checkmark{},\checkmark{}
-  ,\makecell[l]{AMR 3.0 Train},\makecell[r]{55,635},\checkmark{},\checkmark{},
+  \makecell[l]{Train},\makecell[l]{AMR 3.0 Train},\makecell[r]{55,635},\checkmark{},\checkmark{},
   \makecell[l]{Dev},\makecell[l]{AMR 3.0 Dev},\makecell[r]{1,722},\checkmark{},\checkmark{},
   \makecell[l]{Test},\makecell[l]{AMR 2.0 Test},\makecell[r]{1,371},\checkmark{},\checkmark{},\checkmark{}
 \end{filecontents*}
@@ -72,10 +72,10 @@ Jumlah total data untuk masing-masing split (train, dev, dan test) yang digunaka
   {Hasil evaluasi dataset setelah dilakukan filtrasi.}
 
 \begin{filecontents*}{4.1.total-dataset-count.csv}
-  Split,Dataset,Jumlah,Total
-  \makecell[l]{Train},\makecell[l]{PANL-BPPT},\makecell[r]{24,024},\makecell[r]{224,220}
+  Split,Dataset,Subtotal,Total
+  \makecell[l]{Pre-train},\makecell[l]{PANL-BPPT},\makecell[r]{24,024},\makecell[r]{224,220}
   ,\makecell[l]{IWSLT17},\makecell[r]{107,329},
-  ,\makecell[l]{AMR 3.0 Train},\makecell[r]{92,867},
+  \makecell[l]{Train},\makecell[l]{AMR 3.0 Train},\makecell[r]{92,867},
   \makecell[l]{Dev},\makecell[l]{AMR 3.0 Dev},\makecell[r]{3,069},\makecell[r]{3,069}
   \makecell[l]{Test},\makecell[l]{AMR 2.0 Test},\makecell[r]{1,371},\makecell[r]{1,371}
 \end{filecontents*}
