@@ -1,6 +1,6 @@
 \section{Pengujian}
 
-%~ Baseline
+%~ Baseline Translate and Parse using AMRBART
 
 \begin{filecontents*}{4.3.baseline-evaluation.csv}
   {},Precision,Recall,F1
@@ -20,3 +20,24 @@
 \tabl{4.3.baseline-evaluation}
   {4.3.baseline-evaluation.csv}
   {Hasil evaluasi \ti{baseline} dengan metode \ti{translate and parse}.}
+
+%~ XL-AMRBART Bilingual 16 epochs
+
+\begin{filecontents*}{4.3.xlamrbart-16epochs.csv}
+  {},Precision,Recall,F1
+  \makecell[l]{Smatch},0.677,0.653,0.665
+  \makecell[l]{Unlabeled},0.721,0.696,0.708
+  \makecell[l]{No WSD},0.679,0.655,0.667
+  \makecell[l]{Non-sense-frames},0.620,0.636,0.628
+  \makecell[l]{Wikification},0.411,0.370,0.390
+  \makecell[l]{Named Ent.},0.864,0.852,0.858
+  \makecell[l]{Negations},0.029,0.003,0.005
+  \makecell[l]{IgnoreVars},0.475,0.444,0.459
+  \makecell[l]{Concepts},0.701,0.694,0.698
+  \makecell[l]{Frames},0.606,0.621,0.613
+  \makecell[l]{Reentrancies},0.538,0.554,0.546
+  \makecell[l]{SRL},0.596,0.635,0.615
+\end{filecontents*}
+\tabl{4.3.xlamrbart-16epochs}
+  {4.3.xlamrbart-16epochs.csv}
+  {Hasil evaluasi \ti{AMRBART} lintas bahasa untuk Bahasa Indonesia.}
